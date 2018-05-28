@@ -442,9 +442,12 @@ public class WorldUtil
         {
             for (Integer registeredID : WorldUtil.registeredSpaceStations.keySet())
             {
-                DimensionManager.unregisterDimension(registeredID);
-            }
-
+                //Check if the DIM is actually register before trying to unregister it.
+		if(DimensionManager.isDimensionRegistered(registeredID))
+                {
+                    DimensionManager.unregisterDimension(registeredID);
+                }
+	    }
             WorldUtil.registeredSpaceStations = null;
         }
     }
@@ -616,8 +619,12 @@ public class WorldUtil
         {
             for (Integer var1 : WorldUtil.registeredPlanets)
             {
-                DimensionManager.unregisterDimension(var1);
-                GCLog.info("Unregistered Dimension: " + var1);
+                //Check if the DIM is actually register before trying to unregister it.
+		if(DimensionManager.isDimensionRegistered(var1))
+		{
+		    DimensionManager.unregisterDimension(var1);
+                    GCLog.info("Unregistered Dimension: " + var1);
+		}
             }
 
             WorldUtil.registeredPlanets = null;
